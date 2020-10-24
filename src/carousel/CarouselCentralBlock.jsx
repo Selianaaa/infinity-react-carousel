@@ -6,8 +6,6 @@ import dog from '../assets/images/dog.jpg'
 import tiger from '../assets/images/tiger.jpg'
 
 import CarouselItemsBlock from './CarouselItemsBlock'
-import CarouselLeftArrow from './CarouselLeftArrow'
-import CarouselRightArrow from './CarouselRightArrow'
 import { ArrowButton } from '../components'
 
 
