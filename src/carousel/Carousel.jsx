@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CarouselCentralBlock from './CarouselCentralBlock'
+import { CentralBlocks } from './CentralBlocks'
 
 export const Carousel = () => (
   <ContentWrapper>
     <Title>Infinity React Functional Carousel</Title>
 
-    <CarouselCentralBlock />
+    <CentralBlocks />
   </ContentWrapper>
 )
 

@@ -5,10 +5,10 @@ import otter from '../assets/images/otter.jpg'
 import dog from '../assets/images/dog.jpg'
 import tiger from '../assets/images/tiger.jpg'
 
-import CarouselItemsBlock from './CarouselItemsBlock'
+import { CarouselItems } from './CarouselItems'
 import { ArrowButton } from '../components'
 
-export default function CentralBlocks() {
+export const CentralBlocks = () => {
   const carouselItems = [
     {
       image: otter,
@@ -127,12 +127,13 @@ export default function CentralBlocks() {
   return (
     <CentralBlockWrapper onMouseEnter={onMouseOn} onMouseLeave={onMouseOut}>
       <ArrowButton clickHandler={leftArrowClick} />
-      <CarouselItemsBlock items={itemsAmount} {...carouselDataProps} />
+
+      <CarouselItems items={itemsAmount} {...carouselDataProps} />
+
       <ArrowButton type="right" clickHandler={rightArrowClick} />
     </CentralBlockWrapper>
   )
 }
-
 
 const CentralBlockWrapper = styled.div`
   width: 800px;

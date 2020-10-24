@@ -3,27 +3,22 @@ import styled from 'styled-components'
 
 const oneTimeTranlation = 245
 
-export default function CarouselItemsBlock({ items, ...carouselDataProps }) {
-  return (
-    <CarouselWrapper>
-      <CarouselItemsBlockWrapper items={items}>
-        <CarouselData {...carouselDataProps} />
-      </CarouselItemsBlockWrapper>
-    </CarouselWrapper>
-  )
-}
+export const CarouselItems = ({ items, ...carouselDataProps }) => (
+  <CarouselWrapper>
+    <CarouselItemsBlockWrapper items={items}>
+      <CarouselItem {...carouselDataProps} />
+    </CarouselItemsBlockWrapper>
+  </CarouselWrapper>
+)
 
-function CarouselData({
+const CarouselItem = ({
   currentTranslation,
   carouselList,
-  firstIndex,
-  lastIndex,
   translatingItem,
-}) {
-  const translation = Array.from(currentTranslation)
+}) => {
   return carouselList.map((item, index) => {
     const { image, name, description } = item
-    const itemTranslation = translation[index]
+    const itemTranslation = currentTranslation[index]
     if (index === translatingItem) {
       var isTransliting = true
     }
@@ -35,11 +30,11 @@ function CarouselData({
     }
 
     return (
-      <CarouselItem key={index} {...carouselItemsProps}>
-        <CarouselItemImg src={image} alt="" draggable="false" />
-        <CarouselItemName>{name}</CarouselItemName>
-        <p>{description}</p>
-      </CarouselItem>
+      <ItemWrapper key={index} {...carouselItemsProps}>
+        <ItemImg src={image} alt="" draggable="false" />
+        <ItemName>{name}</ItemName>
+        <ItemDescription>{description}</ItemDescription>
+      </ItemWrapper>
     )
   })
 }
@@ -55,29 +50,30 @@ const CarouselItemsBlockWrapper = styled.div`
   position: relative;
   width: ${({ items }) => items * `${oneTimeTranlation}`}px;
   height: 300px;
-  p {
-    font-size: 1vw;
-  }
 `
 
-const CarouselItem = styled.div`
+const ItemWrapper = styled.div`
   width: 240px;
   float: left;
   transform: translate(-245px);
-  cursor: pointer;
   margin: 0 2.5px;
   transition: ${({ isTransliting }) => (isTransliting ? '0s' : '.35s')};
   transform: translate(${({ itemTranslation }) => itemTranslation}px);
 `
 
-const CarouselItemImg = styled.img`
+const ItemImg = styled.img`
   width: 100%;
   height: auto;
   object-fit: contain;
 `
 
-const CarouselItemName = styled.span`
-  font-size: 1vw;
+const ItemName = styled.span`
+  font-size: 1.2vw;
   text-decoration: underline;
   font-weight: bold;
+  color: #3f0326;
+`
+
+const ItemDescription = styled.div`
+  font-size: 1vw;
 `

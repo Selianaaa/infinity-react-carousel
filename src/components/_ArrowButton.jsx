@@ -5,7 +5,7 @@ import arrow from '../assets/images/arrow.png'
 
 export const ArrowButton = ({ clickHandler, type }) => (
   <ButtonWrapper onClick={clickHandler}>
-    <CarouselArrowImg src={arrow} type={type} alt="arrow" />
+    <CarouselArrowImg src={arrow} type={type} alt="arrow" draggable="false" />
   </ButtonWrapper>
 )
 
