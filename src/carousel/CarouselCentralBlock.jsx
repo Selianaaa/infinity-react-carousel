@@ -8,6 +8,7 @@ import tiger from '../assets/images/tiger.jpg'
 import CarouselItemsBlock from './CarouselItemsBlock'
 import CarouselLeftArrow from './CarouselLeftArrow'
 import CarouselRightArrow from './CarouselRightArrow'
+import { ArrowButton } from '../components'
 
 
 export default function CarouselCentralBlock() {
@@ -136,12 +137,12 @@ function CentralBlock() {
             onMouseEnter={onMouseOn}
             onMouseLeave={onMouseOut}
         >
-        <CarouselLeftArrow leftArrowClick={leftArrowClick}/>
+        <ArrowButton clickHandler={leftArrowClick} />
         <CarouselItemsBlock
             items={itemsAmount}
             {...carouselDataProps}
         />
-        <CarouselRightArrow rightArrowClick={rightArrowClick}/>
+        <ArrowButton type='right' clickHandler={rightArrowClick} />
         </CentralBlockWrapper>
     )
 }
