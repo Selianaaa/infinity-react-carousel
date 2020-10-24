@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 import GlobalStyle from './GlobalStyles'
-import CarouselCentralBlock from '../carousel/CarouselCentralBlock';
+import { Carousel } from '../carousel/Carousel';
 
 
 function App() {
-  
+
   return (
     <Container>
       <GlobalStyle/>
-      <CarouselCentralBlock />
+      <Carousel />
     </Container>
   )
 }
@@ -23,6 +23,7 @@ const Container = styled.section`
   width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  background: #F5F5F5;
+  background: #fbfaff;
 `
