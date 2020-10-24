@@ -1,46 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
-
-import otter from '../assets/images/otter.jpg'
-import dog from '../assets/images/dog.jpg'
-import tiger from '../assets/images/tiger.jpg'
 
 import { CarouselItems } from './CarouselItems'
 import { ArrowButton } from '../components'
+import { CarouselContext } from '../context'
 
 export const CentralBlocks = () => {
-  const carouselItems = [
-    {
-      image: otter,
-      name: 'Otter',
-      description:
-        'Otters are carnivorous mammals in the subfamily Lutrinae. The 13 extant otter species are all semiaquatic, aquatic or marine, with diets based on fish and invertebrates.',
-    },
-    {
-      image: dog,
-      name: 'Samoyed',
-      description:
-        'Samoyed is a breed of large herding dog that descended from the Nenets herding laika, a spitz-type dog, with a thick, white, double-layer coat.',
-    },
-    {
-      image: tiger,
-      name: 'Tiger',
-      description:
-        'Tiger is the largest species among the Felidae and classified in the genus Panthera. It is most recognisable for its dark vertical stripes on orangish-brown fur with a lighter underside.',
-    },
-  ]
+  const {
+    items,
+    oneTimeTranslation,
+    autoPlay,
+    setAutoPlay,
+    currentTranslation,
+    setCurrentTranslation,
+  } = useContext(CarouselContext)
 
-  const oneTimeTranlation = 245
-
-  const [carouselList] = useState(setCarouselItems)
+  const carouselList =
+    items.length === 3
+      ? items.slice(items.length - 1).concat(...items, items.slice(0, 2))
+      : items
   const itemsAmount = carouselList.length
 
   const [firstIndex, setFirstIndex] = useState(0)
   const [lastIndex, setLastIndex] = useState(itemsAmount - 1)
   const [translatingItem, setTranslatingItem] = useState(0)
-
-  const [currentTranslation, setCurrentTranslation] = useState([])
-  const [autoPlay, setAutoPlay] = useState(true)
 
   useEffect(() => {
     setInitialTranslation()
@@ -55,18 +38,10 @@ export const CentralBlocks = () => {
     }
   }, [currentTranslation, autoPlay])
 
-  function setCarouselItems() {
-    return carouselItems.length === 3
-      ? carouselItems
-          .slice(carouselItems.length - 1)
-          .concat(...carouselItems, carouselItems.slice(0, 2))
-      : carouselItems
-  }
-
   function setInitialTranslation() {
     const initTranslation = []
     for (var item = 0; item < itemsAmount; item++) {
-      initTranslation.push(-oneTimeTranlation)
+      initTranslation.push(-oneTimeTranslation)
     }
     setCurrentTranslation(initTranslation)
   }
@@ -87,10 +62,10 @@ export const CentralBlocks = () => {
       ? setLastIndex(0)
       : setLastIndex(lastIndex + 1)
     const rightTranslation = currentTranslation.map(
-      (translation) => translation - oneTimeTranlation,
+      (translation) => translation - oneTimeTranslation,
     )
     rightTranslation[firstIndex] =
-      rightTranslation[firstIndex] + oneTimeTranlation * itemsAmount
+      rightTranslation[firstIndex] + oneTimeTranslation * itemsAmount
     setTranslatingItem(firstIndex)
     setCurrentTranslation(rightTranslation)
   }
@@ -101,10 +76,10 @@ export const CentralBlocks = () => {
       : setFirstIndex(firstIndex - 1)
     lastIndex === 0 ? setInitialPosition() : setLastIndex(lastIndex - 1)
     const leftTranslation = currentTranslation.map(
-      (translation) => translation + oneTimeTranlation,
+      (translation) => translation + oneTimeTranslation,
     )
     leftTranslation[lastIndex] =
-      leftTranslation[lastIndex] - oneTimeTranlation * itemsAmount
+      leftTranslation[lastIndex] - oneTimeTranslation * itemsAmount
     setTranslatingItem(lastIndex)
     setCurrentTranslation(leftTranslation)
   }
@@ -121,7 +96,7 @@ export const CentralBlocks = () => {
     firstIndex,
     lastIndex,
     translatingItem,
-    oneTimeTranlation,
+    oneTimeTranslation,
   }
 
   return (
